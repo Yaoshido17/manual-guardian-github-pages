@@ -1,4 +1,4 @@
-const STATIC_CACHE = "manual-guardian-shell-v1";
+const STATIC_CACHE = "manual-guardian-shell-v2";
 const IMAGE_CACHE = "manual-guardian-images-v1";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./assets/app-icon-192.png", "./assets/app-icon-512.png", "./assets/mythag-insignia.svg"];
 self.addEventListener("install", event => { event.waitUntil(caches.open(STATIC_CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())); });
@@ -10,6 +10,7 @@ self.addEventListener("fetch", event => {
     event.respondWith(fetch(request).then(response => { const copy = response.clone(); caches.open(STATIC_CACHE).then(cache => cache.put("./index.html", copy)); return response; }).catch(() => caches.match("./index.html")));
     return;
   }
+  if (new URL(request.url).pathname.includes("/assets/music/")) return;
   if (new URL(request.url).pathname.includes("/assets/")) {
     event.respondWith(caches.open(IMAGE_CACHE).then(async cache => {
       const cached = await cache.match(request);
