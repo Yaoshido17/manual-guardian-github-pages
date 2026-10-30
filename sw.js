@@ -1,5 +1,5 @@
-const STATIC_CACHE = "manual-guardian-shell-v3";
-const IMAGE_CACHE = "manual-guardian-images-v2";
+const STATIC_CACHE = "manual-guardian-shell-v4";
+const IMAGE_CACHE = "manual-guardian-images-v3";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./assets/app-icon-192.png", "./assets/app-icon-512.png", "./assets/mythag-insignia.svg"];
 self.addEventListener("install", event => { event.waitUntil(caches.open(STATIC_CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("manual-guardian-") && ![STATIC_CACHE, IMAGE_CACHE].includes(key)).map(key => caches.delete(key)))).then(() => self.clients.claim())); });
