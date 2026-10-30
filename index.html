@@ -24,6 +24,7 @@
 
 .character-entry .character-tab-panel .character-image-row{display:flex;justify-content:flex-start;align-items:center;gap:10px;flex-wrap:wrap;max-width:100%;margin:14px 0 18px}.character-entry .character-tab-panel .character-image-row>*:not(img){display:contents}.character-entry .character-tab-panel .character-image-row img.manual-image{display:block;width:auto;max-width:min(100%,560px);max-height:380px;margin:0;border-radius:6px}.character-entry .character-tab-panel .character-image-row--multiple img.manual-image{max-width:min(100%,180px);max-height:250px}@media(max-width:700px){.character-entry .character-tab-panel .character-image-row--multiple img.manual-image{max-width:min(42vw,150px);max-height:210px}}
 .character-entry .character-profile-realm.realm-chaos{border-color:#a76c28;background:rgba(232,164,54,.08);color:#f3b544}.character-entry .character-profile-realm.realm-aequor{border-color:#45617c;background:rgba(121,184,255,.07);color:#9acbff}.character-entry .character-profile-realm.realm-caro{border-color:#823d45;background:rgba(206,76,82,.08);color:#f0787e}.character-entry .character-profile-realm.realm-ultra{border-color:#65468b;background:rgba(176,127,231,.08);color:#c4a1ff}
+.character-entry .character-profile.realm-aequor{background:radial-gradient(ellipse at 76% 25%,rgba(70,156,222,.34),transparent 46%),linear-gradient(110deg,#132d43 0%,#172b40 46%,#1b202b 100%);border-color:#35516b}.character-entry .character-profile.realm-aequor:after{content:"";position:absolute;z-index:-1;width:300px;height:300px;right:4%;top:-45%;border:1px solid rgba(160,212,255,.15);border-radius:50%;box-shadow:0 0 0 24px rgba(133,190,233,.035),0 0 0 52px rgba(133,190,233,.025);pointer-events:none}.character-entry .character-profile.realm-aequor .character-profile-kicker{color:#a9d7ff}
 </style>
 </head>
 <body>
@@ -96,7 +97,7 @@ for(const item of characterEntries){
  const sourceImage=(isContinuation?rootImage:body.querySelector('img.manual-image'))||body.querySelector('img.manual-image');
  const skillsLink=[...body.querySelectorAll('a[href]')].find(a=>/habilidades|skills|pasivas/i.test(a.textContent+' '+a.href));
  const intro=isGuide?[...body.children].find(el=>el.tagName==='P'&&el.textContent.trim().length>120&&!el.querySelector('img')):null;
- const profile=document.createElement('section');profile.className='character-profile';profile.id='aequor-profile-'+item.dataset.index;profile.setAttribute('aria-label','Perfil de '+name);
+ const profile=document.createElement('section');profile.className='character-profile realm-'+item.dataset.realm;profile.id='character-profile-'+item.dataset.index;profile.setAttribute('aria-label','Perfil de '+name);
  const art=document.createElement('div');art.className='character-profile-art';
  if(sourceImage){const portrait=sourceImage.cloneNode();portrait.alt='Ilustración de '+name;portrait.loading='eager';portrait.decoding='async';art.append(portrait);if(sourceImage.closest('.entry-body')===body){const figure=sourceImage.closest('figure.image-frame');if(figure&&figure.querySelectorAll('img').length===1)figure.remove();else sourceImage.remove();}}
  else{const fallback=document.createElement('div');fallback.className='character-profile-placeholder';fallback.setAttribute('aria-hidden','true');fallback.textContent=name.trim().charAt(0).toLocaleUpperCase('es');art.append(fallback);}
