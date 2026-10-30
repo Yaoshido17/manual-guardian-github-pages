@@ -108,7 +108,7 @@ for(const item of characterEntries){
  if(skillsLink){const link=document.createElement('a');link.className='character-profile-link';link.href=skillsLink.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Ver habilidades y pasivas ↗';copy.append(link);const sourceP=skillsLink.closest('p');if(sourceP&&sourceP!==intro&&sourceP.textContent.trim().length<130)sourceP.remove();}
  profile.append(art,copy);
  const children=[...body.children].filter(el=>el!==profile&&el!==body.querySelector('.entry-close'));
- const armadoIndex=children.findIndex(el=>/^armado\b/i.test(el.textContent.trim())),firstGuideSection=armadoIndex>=0?armadoIndex:children.findIndex(el=>/^(?:equipo\b|soy nuevo|ruedas\b|adicional\b|¿su posse|¿como armo las piezas de los pactos)/i.test(normalize(el.textContent.trim())));
+ const firstGuideSection=children.findIndex(el=>/^(?:armado\b|equipo\b|soy nuevo|ruedas\b|adicional\b|¿su posse|¿como armo las piezas de los pactos|e\+\s*(?:del personaje)?\s*$|reliquia dimensional)/i.test(normalize(el.textContent.trim())));
  const beforeArmado=firstGuideSection<0?children:children.slice(0,firstGuideSection),afterArmado=firstGuideSection<0?[]:children.slice(firstGuideSection);
  const priorityNodes=[];for(const el of [...beforeArmado,...afterArmado])if(/habilidades prioritarias|prioridad de habilidades/i.test(el.textContent)){priorityNodes.push(el);}
  const beforeClean=beforeArmado.filter(el=>!priorityNodes.includes(el)),afterClean=afterArmado.filter(el=>!priorityNodes.includes(el));
@@ -124,20 +124,22 @@ for(const item of characterEntries){
  }
  const tabs=document.createElement('div');tabs.className='character-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Secciones de '+name);
  const panelHost=document.createElement('div');panelHost.className='character-tab-panels';
- const tabDefinitions=[['resumen','Resumen'],['habilidades','Habilidades y pasivas'],['prioridad','Prioridad'],['notas','Notas de uso'],['armado','Armado'],['ruedas','Ruedas'],['posse','Posse']];
+ const tabDefinitions=[['resumen','Resumen'],['habilidades','Habilidades y pasivas'],['prioridad','Prioridad'],['notas','Notas de uso'],['armado','Armado'],['ruedas','Ruedas'],['posse','Posse'],['reliquias','Reliquias dimensionales'],['eplus','E+ del personaje']];
  const panels={};
  for(const [tab,label] of tabDefinitions){const button=document.createElement('button');button.type='button';button.id='aequor-tab-'+item.dataset.index+'-'+tab;button.setAttribute('role','tab');button.setAttribute('aria-controls','aequor-panel-'+item.dataset.index+'-'+tab);button.setAttribute('aria-selected',String(tab==='resumen'));button.textContent=label;tabs.append(button);const panel=document.createElement('section');panel.id='aequor-panel-'+item.dataset.index+'-'+tab;panel.className='character-tab-panel';panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',button.id);panel.hidden=tab!=='resumen';const h=document.createElement('h3');h.textContent=label;panel.append(h);panels[tab]=panel;panelHost.append(panel);button.addEventListener('click',()=>{tabs.querySelectorAll('[role=tab]').forEach(b=>b.setAttribute('aria-selected',String(b===button)));Object.entries(panels).forEach(([key,p])=>p.hidden=key!==tab);});}
  const summaryPanel=panels.resumen,summaryList=document.createElement('div');summaryList.className='character-summary-list';for(const el of summaryNodes){if(/^funciones principales/i.test(el.textContent.trim()))summaryPanel.append(el);else if(el.tagName==='P'&&el.textContent.trim().length<95&&!el.querySelector('img'))summaryList.append(el);else summaryPanel.append(el);}if(summaryList.childElementCount)summaryPanel.append(summaryList);
  for(const el of skillSource)panels.habilidades.append(el);
  for(const el of priorityNodes)panels.prioridad.append(el);
  for(const el of noteNodes)panels.notas.append(el);
- const guideSections={armado:[],ruedas:[],posse:[]},remainingNodes=[];let guideMode='armado';
+ const guideSections={armado:[],ruedas:[],posse:[],reliquias:[],eplus:[]},remainingNodes=[];let guideMode='armado';
  for(const el of afterClean){const text=normalize(el.textContent.trim());
   if(/^armado\b/.test(text))guideMode='armado';
   else if(/^ruedas\b/.test(text))guideMode='ruedas';
+  else if(/^reliquia dimensional/.test(text))guideMode='reliquias';
+  else if(/^e\+\s*(?:del personaje)?\s*$/.test(text))guideMode='eplus';
   else if(/^(?:estadisticas (?:de )?(?:los )?pactos|pactos iniciales|¿como armo las piezas de los pactos)/.test(text))guideMode='armado';
   else if(/^¿su posse/.test(text))guideMode='posse';
-  else if(/^(?:equipo\b|soy nuevo|adicional\b|¿para que funciona nuestro despertar|e\+\b|reliquia dimensional|aptitud reforja|¿cual es su pasiva|¿tiene algun combo)/.test(text))guideMode='original';
+  else if(/^(?:equipo\b|soy nuevo|adicional\b|¿para que funciona nuestro despertar|aptitud reforja|¿cual es su pasiva|¿tiene algun combo)/.test(text))guideMode='original';
   if(guideMode==='original')remainingNodes.push(el);else if(!(guideMode==='ruedas'&&/^ruedas\s*:?[\s]*$/.test(text)))guideSections[guideMode].push(el);
  }
  for(const [kind,nodes] of Object.entries(guideSections)){
@@ -151,7 +153,7 @@ for(const item of characterEntries){
    }else if(!labelText){el.classList.add('character-image-row');if(images.length>1)el.classList.add('character-image-row--multiple');}
   }
  }
- const emptyMessages={resumen:'Esta continuación conserva su introducción en el contenido original de abajo.',habilidades:'Esta guía no incluye más detalles de habilidades en este apartado.',prioridad:'Esta guía no especifica un orden de prioridad de habilidades.',notas:'Esta guía no incluye notas de uso adicionales antes del apartado de armado.',armado:'Esta guía no contiene una configuración de armado separada.',ruedas:'Esta guía no especifica ruedas recomendadas en un apartado separado.',posse:'Esta guía no incluye información sobre Posse.'};for(const [key,message] of Object.entries(emptyMessages))if(panels[key].children.length===1){const p=document.createElement('p');p.textContent=message;panels[key].append(p);}
+ const emptyMessages={resumen:'Esta continuación conserva su introducción en el contenido original de abajo.',habilidades:'Esta guía no incluye más detalles de habilidades en este apartado.',prioridad:'Esta guía no especifica un orden de prioridad de habilidades.',notas:'Esta guía no incluye notas de uso adicionales antes del apartado de armado.',armado:'Esta guía no contiene una configuración de armado separada.',ruedas:'Esta guía no especifica ruedas recomendadas en un apartado separado.',posse:'Esta guía no incluye información sobre Posse.',reliquias:'Esta guía no contiene información de reliquias dimensionales en un apartado separado.',eplus:'Esta guía no incluye información E+ en un apartado separado.'};for(const [key,message] of Object.entries(emptyMessages))if(panels[key].children.length===1){const p=document.createElement('p');p.textContent=message;panels[key].append(p);}
  const original=document.createElement('div');original.className='character-original-content';for(const el of remainingNodes)original.append(el);const close=body.querySelector('.entry-close');if(close)original.append(close);
  body.replaceChildren(profile,tabs,panelHost,original);
 }
