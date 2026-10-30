@@ -25,6 +25,7 @@
 .character-entry .character-tab-panel .character-image-row{display:flex;justify-content:flex-start;align-items:center;gap:10px;flex-wrap:wrap;max-width:100%;margin:14px 0 18px}.character-entry .character-tab-panel .character-image-row>*:not(img){display:contents}.character-entry .character-tab-panel .character-image-row img.manual-image{display:block;width:auto;max-width:min(100%,560px);max-height:380px;margin:0;border-radius:6px}.character-entry .character-tab-panel .character-image-row--multiple img.manual-image{max-width:min(100%,180px);max-height:250px}@media(max-width:700px){.character-entry .character-tab-panel .character-image-row--multiple img.manual-image{max-width:min(42vw,150px);max-height:210px}}
 .character-entry .character-profile-realm.realm-chaos{border-color:#a76c28;background:rgba(232,164,54,.08);color:#f3b544}.character-entry .character-profile-realm.realm-aequor{border-color:#45617c;background:rgba(121,184,255,.07);color:#9acbff}.character-entry .character-profile-realm.realm-caro{border-color:#823d45;background:rgba(206,76,82,.08);color:#f0787e}.character-entry .character-profile-realm.realm-ultra{border-color:#65468b;background:rgba(176,127,231,.08);color:#c4a1ff}
 .character-entry .character-profile.realm-aequor{background:radial-gradient(ellipse at 76% 25%,rgba(70,156,222,.34),transparent 46%),linear-gradient(110deg,#132d43 0%,#172b40 46%,#1b202b 100%);border-color:#35516b}.character-entry .character-profile.realm-aequor:after{content:"";position:absolute;z-index:-1;width:300px;height:300px;right:4%;top:-45%;border:1px solid rgba(160,212,255,.15);border-radius:50%;box-shadow:0 0 0 24px rgba(133,190,233,.035),0 0 0 52px rgba(133,190,233,.025);pointer-events:none}.character-entry .character-profile.realm-aequor .character-profile-kicker{color:#a9d7ff}
+.character-entry.realm-aequor .manual-table tr:first-child td,.character-entry.realm-aequor .manual-table thead th{background:#1b3c56!important;color:#c9e8ff;border-color:#416c8e}.character-entry.realm-aequor .manual-table tr:first-child td strong,.character-entry.realm-aequor .manual-table thead th strong{color:#d9f0ff}
 </style>
 </head>
 <body>
@@ -92,7 +93,7 @@ for(const item of characterEntries){
  const title=item.querySelector('summary .entry-title').textContent.trim(),isGuide=/guía del personaje/i.test(title),isContinuation=/continuación/i.test(title);
  if(!isGuide)continue;
  const name=characterNameOf(item),key=characterKey(name),body=item.querySelector('.entry-body'),realmLabels={chaos:'Chaos',aequor:'Aequor',caro:'Caro',ultra:'Ultra'},realmLabel=realmLabels[item.dataset.realm]||'General';if(!body)continue;
- item.classList.add('character-entry');
+ item.classList.add('character-entry','realm-'+item.dataset.realm);
  const root=characterRoots.get(key),rootImage=root?.querySelector('.entry-body img.manual-image');
  const sourceImage=(isContinuation?rootImage:body.querySelector('img.manual-image'))||body.querySelector('img.manual-image');
  const skillsLink=[...body.querySelectorAll('a[href]')].find(a=>/habilidades|skills|pasivas/i.test(a.textContent+' '+a.href));
