@@ -89,7 +89,7 @@ const characterRoots=new Map();
 for(const item of characterEntries){const title=item.querySelector('summary .entry-title').textContent.trim();if(/guía del personaje/i.test(title))characterRoots.set(characterKey(characterNameOf(item)),item);}
 for(const item of characterEntries){
  const title=item.querySelector('summary .entry-title').textContent.trim(),isGuide=/guía del personaje/i.test(title),isContinuation=/continuación/i.test(title);
- if(!isGuide&&!isContinuation)continue;
+ if(!isGuide)continue;
  const name=characterNameOf(item),key=characterKey(name),body=item.querySelector('.entry-body'),realmLabels={chaos:'Chaos',aequor:'Aequor',caro:'Caro',ultra:'Ultra'},realmLabel=realmLabels[item.dataset.realm]||'General';if(!body)continue;
  item.classList.add('character-entry');
  const root=characterRoots.get(key),rootImage=root?.querySelector('.entry-body img.manual-image');
