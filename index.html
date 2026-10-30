@@ -140,7 +140,17 @@ for(const item of characterEntries){
   else if(/^(?:equipo\b|soy nuevo|adicional\b|¿para que funciona nuestro despertar|e\+\b|reliquia dimensional|aptitud reforja|¿cual es su pasiva|¿tiene algun combo)/.test(text))guideMode='original';
   if(guideMode==='original')remainingNodes.push(el);else if(!(guideMode==='ruedas'&&/^ruedas\s*:?[\s]*$/.test(text)))guideSections[guideMode].push(el);
  }
- for(const [kind,nodes] of Object.entries(guideSections)){const panel=panels[kind];for(const el of nodes)panel.append(el);if(kind==='armado'&&item.dataset.realm==='aequor')for(const cell of panel.querySelectorAll('.manual-table td:first-child'))if(/^(soporte|dps)$/.test(normalize(cell.textContent.trim())))cell.classList.add('aequor-build-role');for(const el of [...panel.children]){const images=[...el.querySelectorAll('img.manual-image')];if(!images.length)continue;const withoutImages=el.cloneNode(true);withoutImages.querySelectorAll('img').forEach(img=>img.remove());if(!withoutImages.textContent.trim()){el.classList.add('character-image-row');if(images.length>1)el.classList.add('character-image-row--multiple');}}}
+ for(const [kind,nodes] of Object.entries(guideSections)){
+  const panel=panels[kind];for(const el of nodes)panel.append(el);
+  if(kind==='armado'&&item.dataset.realm==='aequor')for(const cell of panel.querySelectorAll('.manual-table td:first-child'))if(/^(soporte|dps)$/.test(normalize(cell.textContent.trim())))cell.classList.add('aequor-build-role');
+  for(const el of [...panel.children]){
+   const images=[...el.querySelectorAll('img.manual-image')];if(!images.length)continue;
+   const withoutImages=el.cloneNode(true);withoutImages.querySelectorAll('img').forEach(img=>img.remove());const labelText=withoutImages.textContent.trim();
+   if(kind==='armado'&&item.dataset.realm==='aequor'&&labelText){
+    const row=document.createElement('div');row.className='character-image-row'+(images.length>1?' character-image-row--multiple':'');images.forEach(img=>row.append(img.cloneNode(true)));withoutImages.classList.add('character-armado-label');el.replaceWith(withoutImages,row);
+   }else if(!labelText){el.classList.add('character-image-row');if(images.length>1)el.classList.add('character-image-row--multiple');}
+  }
+ }
  const emptyMessages={resumen:'Esta continuación conserva su introducción en el contenido original de abajo.',habilidades:'Esta guía no incluye más detalles de habilidades en este apartado.',prioridad:'Esta guía no especifica un orden de prioridad de habilidades.',notas:'Esta guía no incluye notas de uso adicionales antes del apartado de armado.',armado:'Esta guía no contiene una configuración de armado separada.',ruedas:'Esta guía no especifica ruedas recomendadas en un apartado separado.',posse:'Esta guía no incluye información sobre Posse.'};for(const [key,message] of Object.entries(emptyMessages))if(panels[key].children.length===1){const p=document.createElement('p');p.textContent=message;panels[key].append(p);}
  const original=document.createElement('div');original.className='character-original-content';for(const el of remainingNodes)original.append(el);const close=body.querySelector('.entry-close');if(close)original.append(close);
  body.replaceChildren(profile,tabs,panelHost,original);
