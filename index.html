@@ -343,6 +343,28 @@ music.addEventListener('ended', () => selectTrack(currentTrack + 1, true));
 music.addEventListener('error', () => { trackTitle.textContent = 'No se pudo cargar la canción'; });
 syncFavorites();update();const installButton=document.querySelector("#install-app"),installGuide=document.querySelector("#install-guide"),installGuideText=document.querySelector("#install-guide-text");let installPrompt=null;const iosDevice=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);const installedApp=navigator.standalone===true||window.matchMedia("(display-mode: standalone)").matches;if(installedApp)installButton.hidden=true;window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();installPrompt=event;installButton.hidden=false});window.addEventListener("appinstalled",()=>{installButton.hidden=true;installPrompt=null});installButton.addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();const result=await installPrompt.userChoice;if(result.outcome==="accepted")installButton.hidden=true;installPrompt=null;return}installGuideText.textContent=iosDevice?"En Safari, toca Compartir, elige Añadir a pantalla de inicio y confirma con Añadir.":"En el menú del navegador, elige Instalar aplicación o Añadir a pantalla de inicio. Si aparece una confirmación, acéptala.";installGuide.showModal()});document.querySelector("#install-guide-close").addEventListener("click",()=>installGuide.close());installGuide.addEventListener("click",event=>{if(event.target===installGuide)installGuide.close()});
 </script>
+<script>
+/* Navegación autónoma de categorías: mantiene utilizables las tarjetas aunque
+   una transformación de contenido falle en el script principal. */
+(()=>{
+ const manual=document.querySelector('.manual'),grid=document.querySelector('.jump-grid'),toolbarHost=manual;
+ if(!manual||!grid)return;
+ let toolbar=manual.querySelector('.category-toolbar');
+ if(!toolbar){toolbar=document.createElement('div');toolbar.className='category-toolbar';toolbar.hidden=true;toolbar.innerHTML='<button type="button">← Volver a categorías</button><h2></h2>';manual.prepend(toolbar);}
+ const title=toolbar.querySelector('h2'),realmTabs=document.querySelector('#realm-tabs'),search=document.querySelector('#search'),favorites=document.querySelector('#favorites-toggle'),none=document.querySelector('#no-results');
+ let category='todos',realm='todos';
+ const entries=[...manual.querySelectorAll('.entry')],groups=[...manual.querySelectorAll('.manual-category')];
+ function render(){let count=0;for(const item of entries){const matchesCategory=category==='todos'||item.dataset.category===category;const matchesRealm=category!=='personajes'||realm==='todos'||item.dataset.realm==='shared'||item.dataset.realm===realm;const term=(search?.value||'').trim().toLocaleLowerCase('es');const text=(item.dataset.search+' '+item.textContent).toLocaleLowerCase('es');const matchesSearch=!term||text.includes(term);item.hidden=!(matchesCategory&&matchesRealm&&matchesSearch);if(!item.hidden)count++;}for(const group of groups)group.hidden=!group.querySelector('.entry:not([hidden])');if(none)none.style.display=count?'none':'block';}
+ function openCategory(value,label){category=value;realm='todos';document.body.classList.add('category-page');manual.hidden=false;grid.hidden=true;toolbar.hidden=false;title.textContent=label;document.querySelectorAll('.filter[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===value)));if(favorites)favorites.dataset.active='false';if(search)search.value='';if(realmTabs){realmTabs.hidden=value!=='personajes';realmTabs.querySelectorAll('[data-realm]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.realm==='todos')));}render();window.scrollTo({top:0,behavior:'smooth'});}
+ function home(){category='todos';realm='todos';document.body.classList.remove('category-page');manual.hidden=true;grid.hidden=false;toolbar.hidden=true;document.querySelectorAll('.filter[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter==='todos')));if(realmTabs)realmTabs.hidden=true;if(favorites)favorites.dataset.active='false';if(search)search.value='';render();window.scrollTo({top:0,behavior:'smooth'});}
+ grid.addEventListener('click',event=>{const link=event.target.closest('a.jump');if(!link)return;event.preventDefault();event.stopImmediatePropagation();const section=document.querySelector(link.getAttribute('href'));if(section)openCategory(section.dataset.category,link.querySelector('span')?.textContent.trim()||'Sección');},true);
+ document.querySelectorAll('.filter[data-filter]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();if(button.dataset.filter==='todos'){home();return;}openCategory(button.dataset.filter,button.textContent.trim());},true));
+ toolbar.querySelector('button').addEventListener('click',home,true);
+ realmTabs?.addEventListener('click',event=>{const button=event.target.closest('[data-realm]');if(!button)return;event.stopImmediatePropagation();realm=button.dataset.realm;realmTabs.querySelectorAll('[data-realm]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));render();window.scrollTo({top:0,behavior:'smooth'});},true);
+ search?.addEventListener('input',render,true);
+ render();
+})();
+</script>
 <script>if("serviceWorker" in navigator && location.protocol !== "file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
 <script type="module" src="./comments.js"></script>
 <aside id="suggested-videos-widget" aria-label="Videos sugeridos">
