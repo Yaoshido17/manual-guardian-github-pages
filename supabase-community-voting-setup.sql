@@ -51,7 +51,7 @@ insert into public.community_characters (id) values
   ('murphy-fauxborn'), ('nautila'), ('nymphaea'), ('ogier'), ('ogier-oathbound'),
   ('pandia'), ('pickman'), ('pollux'), ('ramona'), ('ramona-bucle'), ('ryker'),
   ('salvador'), ('saya'), ('sorel'), ('tawil'), ('thais'), ('uvhash'),
-  ('vivian'), ('vortice'), ('xu')
+  ('vivian'), ('vortice'), ('wanda'), ('xu')
 on conflict (id) do nothing;
 
 create or replace function public.get_community_character_vote_counts()
