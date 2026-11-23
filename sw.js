@@ -13,7 +13,8 @@ self.addEventListener("fetch", event => {
   if (new URL(request.url).pathname.endsWith("/assets/community-voting-config.js")) {
     event.respondWith(fetch(request).catch(() => caches.match(request)));
     return;
-  }  if (new URL(request.url).pathname.includes("/assets/music/")) return;
+  }
+  if (new URL(request.url).pathname.includes("/assets/music/")) return;
   if (new URL(request.url).pathname.includes("/assets/")) {
     event.respondWith(caches.open(IMAGE_CACHE).then(async cache => {
       const cached = await cache.match(request);

@@ -1272,15 +1272,21 @@ const tierVersionTabs=[...document.querySelectorAll("#cat-inicio [data-tier-vers
 document.querySelectorAll('.entry-favorite').forEach(button=>button.addEventListener('click',()=>{const id=button.dataset.favoriteIndex;if(favorites.has(id))favorites.delete(id);else favorites.add(id);try{localStorage.setItem('manual-guardian-favorites',JSON.stringify([...favorites]));}catch{}syncFavorites();update();}));
 favoritesToggle.addEventListener('click',()=>{favoritesToggle.dataset.active=favoritesToggle.dataset.active==='true'?'false':'true';syncFavorites();update();});
 search.addEventListener('input',update);filterButtons.forEach(button=>button.addEventListener('click',()=>{if(button.dataset.filter==='todos'){showCategoryHome();return;}showCategory(button.dataset.filter,button.textContent.trim());}));
-const musicTracks = ["02. 忘却之歌-Song of Memento-いとうかなこ Ver..wav", "02. 呢喃之蛇-Whispering Serpent.wav", "01. 淌过猩红-Wading the Crimson.wav", "01. 经幡缭绕-Fluttering Prayer Flags.wav", "02. 苹果岛的约定-To Apple Isle, Together.wav", "01. 自火中来-From the Flames.wav"];
-const music = document.querySelector('#site-audio'), trackTitle = document.querySelector('#audio-track-title'), playButton = document.querySelector('#audio-play'), playlistSelect = document.querySelector('#audio-playlist'), volumeSlider = document.querySelector('#audio-volume');
+const musicTracks = [
+  { title: "02. 忘却之歌-Song of Memento-いとうかなこ Ver.", file: "song-of-memento.mp3" },
+  { title: "02. 呢喃之蛇-Whispering Serpent", file: "whispering-serpent.mp3" },
+  { title: "01. 淌过猩红-Wading the Crimson", file: "wading-the-crimson.mp3" },
+  { title: "01. 经幡缭绕-Fluttering Prayer Flags", file: "fluttering-prayer-flags.mp3" },
+  { title: "02. 苹果岛的约定-To Apple Isle, Together", file: "apple-isle-together.mp3" },
+  { title: "01. 自火中来-From the Flames", file: "from-the-flames.mp3" }
+];const music = document.querySelector('#site-audio'), trackTitle = document.querySelector('#audio-track-title'), playButton = document.querySelector('#audio-play'), playlistSelect = document.querySelector('#audio-playlist'), volumeSlider = document.querySelector('#audio-volume');
 const audioPlayer=document.querySelector('#site-audio-player'),audioSizeToggle=document.querySelector('#audio-size-toggle');
 document.querySelector('#audio-minimize').addEventListener('click',()=>audioPlayer.classList.add('is-minimized'));
 document.querySelector('#audio-restore').addEventListener('click',()=>audioPlayer.classList.remove('is-minimized'));
 audioSizeToggle.addEventListener('click',()=>{const expanded=audioPlayer.classList.toggle('is-expanded');audioSizeToggle.setAttribute('aria-label',expanded?'Reducir reproductor':'Ampliar reproductor');audioSizeToggle.title=expanded?'Reducir reproductor':'Ampliar reproductor';audioSizeToggle.textContent=expanded?'⤡':'⤢'});
 let currentTrack = -1;
-for (const [index, name] of musicTracks.entries()) { const option = document.createElement('option'); option.value = String(index); option.textContent = name; playlistSelect.append(option); }
-function selectTrack(index, play = false) { currentTrack = (index + musicTracks.length) % musicTracks.length; const name = musicTracks[currentTrack]; music.src = 'assets/music/' + name.split('/').map(encodeURIComponent).join('/'); trackTitle.textContent = name; trackTitle.title = name; playlistSelect.value = String(currentTrack); if (play) music.play().catch(() => { trackTitle.textContent = name + ' · toca ▶ para reproducir'; }); }
+for (const [index, track] of musicTracks.entries()) { const option = document.createElement('option'); option.value = String(index); option.textContent = track.title; playlistSelect.append(option); }
+function selectTrack(index, play = false) { currentTrack = (index + musicTracks.length) % musicTracks.length; const track = musicTracks[currentTrack], name = track.title; music.src = 'assets/music/' + track.file; trackTitle.textContent = name; trackTitle.title = name; playlistSelect.value = String(currentTrack); if (play) music.play().catch(() => { trackTitle.textContent = name + ' · toca ▶ para reproducir'; }); }
 function toggleMusic() { if (currentTrack < 0) selectTrack(0); if (music.paused) music.play().catch(() => {}); else music.pause(); }
 playButton.addEventListener('click', toggleMusic);
 document.querySelector('#audio-previous').addEventListener('click', () => selectTrack(currentTrack < 0 ? 0 : currentTrack - 1, true));
