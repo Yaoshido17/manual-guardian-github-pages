@@ -10,7 +10,10 @@ self.addEventListener("fetch", event => {
     event.respondWith(fetch(request).then(response => { const copy = response.clone(); caches.open(STATIC_CACHE).then(cache => cache.put("./index.html", copy)); return response; }).catch(() => caches.match("./index.html")));
     return;
   }
-  if (new URL(request.url).pathname.includes("/assets/music/")) return;
+  if (new URL(request.url).pathname.endsWith("/assets/community-voting-config.js")) {
+    event.respondWith(fetch(request).catch(() => caches.match(request)));
+    return;
+  }  if (new URL(request.url).pathname.includes("/assets/music/")) return;
   if (new URL(request.url).pathname.includes("/assets/")) {
     event.respondWith(caches.open(IMAGE_CACHE).then(async cache => {
       const cached = await cache.match(request);
