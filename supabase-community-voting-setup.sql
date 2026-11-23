@@ -44,7 +44,7 @@ grant usage on schema public to anon, authenticated;
 
 insert into public.community_characters (id) values
   ('24'), ('agrippa'), ('aigis'), ('alva'), ('arachne'), ('caecus'),
-  ('caraboo'), ('castor'), ('corposant'), ('daffodil'), ('doll'),
+  ('caraboo'), ('castor'), ('clementine'), ('corposant'), ('daffodil'), ('doll'),
   ('doll-infierno'), ('doresain'), ('erica'), ('faint'), ('faros'),
   ('goliat'), ('hameln'), ('helot'), ('helot-catena'), ('horla'), ('karen'),
   ('kathigu-ra'), ('lily'), ('lotan'), ('lotan-cetarchon'), ('mouchette'),
