@@ -46,7 +46,7 @@ insert into public.community_characters (id) values
   ('24'), ('agrippa'), ('aigis'), ('alva'), ('arachne'), ('caecus'),
   ('caraboo'), ('castor'), ('corposant'), ('daffodil'), ('doll'),
   ('doll-infierno'), ('doresain'), ('erica'), ('faint'), ('faros'),
-  ('goliat'), ('hameln'), ('helot'), ('helot-catena'), ('karen'),
+  ('goliat'), ('hameln'), ('helot'), ('helot-catena'), ('horla'), ('karen'),
   ('kathigu-ra'), ('lily'), ('lotan'), ('lotan-cetarchon'), ('mouchette'),
   ('murphy-fauxborn'), ('nautila'), ('nymphaea'), ('ogier'), ('ogier-oathbound'),
   ('pandia'), ('pickman'), ('pollux'), ('ramona'), ('ramona-bucle'), ('ryker'),
