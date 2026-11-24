@@ -174,20 +174,23 @@
 .tinct-wheel-catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:14px 0 18px}
 .character-entry .tinct-wheel-catalog p{display:flex;align-items:center;min-height:44px;margin:0;padding:9px 11px;border:1px solid var(--line);border-radius:7px;background:var(--surface2);color:var(--ink);font-size:12px;line-height:1.45}
 .tinct-pact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 20px}
-.tinct-pact-card{min-width:0;overflow:hidden;border:1px solid #49454a;border-radius:8px;background-color:#171923;background-image:url("assets/tinct-guide/pactos.webp");background-repeat:no-repeat}
-.tinct-pact-card-1{aspect-ratio:1.36;background-size:205% 318%;background-position:1% 1%}
-.tinct-pact-card-2{aspect-ratio:1.36;background-size:205% 318%;background-position:100% 1%}
-.tinct-pact-card-3{aspect-ratio:1.48;background-size:205% 346%;background-position:1% 49%}
-.tinct-pact-card-4{aspect-ratio:1.48;background-size:205% 346%;background-position:100% 49%}
-.tinct-pact-card-5{aspect-ratio:1.44;background-size:205% 337%;background-position:1% 95%}
-.tinct-pact-card-6{aspect-ratio:1.44;background-size:205% 337%;background-position:100% 95%}
-.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple{display:grid;grid-template-columns:minmax(0,1fr);width:min(100%,1000px);gap:14px;align-items:start;margin:14px 0 18px}
-.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple img.manual-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0;padding:4px;border:1px solid var(--line);border-radius:7px;background:var(--surface)}
-.tinct-wheel-art{width:min(100%,720px);margin:14px 0 18px;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#17181e}
+.tinct-pact-card{position:relative;min-width:0;overflow:hidden;border:1px solid #49454a;border-radius:8px;background:#171923}
+.tinct-pact-source{position:absolute;display:block;max-width:none;height:307%;width:205%;object-fit:fill;margin:0}
+.tinct-pact-card-1{aspect-ratio:1.35}.tinct-pact-card-1 .tinct-pact-source{left:-.75%;top:-1%}
+.tinct-pact-card-2{aspect-ratio:1.33}.tinct-pact-card-2 .tinct-pact-source{left:-106.5%;top:-1%;width:208%}
+.tinct-pact-card-3{aspect-ratio:1.46}.tinct-pact-card-3 .tinct-pact-source{left:-.75%;top:-118%;height:332%}
+.tinct-pact-card-4{aspect-ratio:1.44}.tinct-pact-card-4 .tinct-pact-source{left:-106.5%;top:-118%;width:208%;height:332%}
+.tinct-pact-card-5{aspect-ratio:1.44}.tinct-pact-card-5 .tinct-pact-source{left:-.75%;top:-224%;height:328%}
+.tinct-pact-card-6{aspect-ratio:1.42}.tinct-pact-card-6 .tinct-pact-source{left:-106.5%;top:-224%;width:208%;height:328%}
+.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple{display:grid;grid-template-columns:minmax(0,1fr);width:min(100%,1185px);gap:16px;align-items:start;margin:16px 0 22px}
+.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple img.manual-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0;padding:5px;border:1px solid #49454a;border-radius:8px;background:#171923}
+.tinct-wheel-art{width:min(100%,945px);margin:16px 0 22px;overflow:hidden;border:1px solid #49454a;border-radius:8px;background:#171923}
 .tinct-wheel-art img{display:block;width:100%;max-width:100%;height:auto;max-height:none;margin:0;object-fit:contain}
-.tinct-team-gallery.character-image-row--multiple{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));width:100%;gap:12px;align-items:start;margin:14px 0 18px}
-.tinct-team-gallery img.manual-image{display:block;width:100%;height:auto;max-width:100%;max-height:none;margin:0;padding:4px;border:1px solid var(--line);border-radius:7px;background:var(--surface)}
-@media(max-width:680px){.tinct-pact-grid{grid-template-columns:1fr}.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple{width:100%}.tinct-team-gallery.character-image-row--multiple{grid-template-columns:1fr}}
+.character-entry[data-index="106"] .character-tab-panel[id$="-ruedas"] .tinct-wheel-art img.manual-image--wide{width:100%;max-width:100%;max-height:none;height:auto;margin:0;object-fit:contain}
+.character-entry[data-index="106"] .character-tab-panel[id$="-adicional"] .tinct-team-gallery.character-image-row--multiple{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,1100px);gap:14px;align-items:start;margin:16px 0 22px}
+.character-entry[data-index="106"] .character-tab-panel[id$="-adicional"] .tinct-team-gallery img.manual-image{display:block;width:100%;height:auto;max-width:100%;max-height:none;margin:0;padding:5px;border:1px solid #49454a;border-radius:8px;background:#171923;object-fit:contain}
+.character-entry[data-index="106"] .character-tab-panel[id$="-adicional"] .tinct-team-gallery img.manual-image--wide{width:100%;max-width:100%;max-height:none}
+@media(max-width:680px){.tinct-pact-grid{grid-template-columns:1fr}.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple{width:100%}.character-entry[data-index="106"] .character-tab-panel[id$="-adicional"] .tinct-team-gallery.character-image-row--multiple{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1191,7 +1194,7 @@
 <tr><td><strong>Gemelo retorcido blanco</strong></td><td>Para activar las pasivas de ruedas como Shrouded Birth y Birth of a Soul.</td></tr>
 <tr><td><strong>Revoluci&#243;n</strong></td><td>Para usar su definitiva y su OE con mayor facilidad.</td></tr>
 </tbody></table></div>
-<div class="tinct-pact-grid" role="group" aria-label="Efectos de los pactos recomendados para Tinct"><div class="tinct-pact-card tinct-pact-card-1" role="img" aria-label="Pacto Drenaje de vida y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-2" role="img" aria-label="Pacto Deus Ex Machina y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-3" role="img" aria-label="Pacto Los suspiros del cementerio y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-4" role="img" aria-label="Pacto Revolución y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-5" role="img" aria-label="Pacto Gemelos retorcidos: blancos y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-6" role="img" aria-label="Pacto Gemelos retorcidos: negro y bonificaciones recomendadas"></div></div>
+<div class="tinct-pact-grid" role="group" aria-label="Efectos de los pactos recomendados para Tinct"><div class="tinct-pact-card tinct-pact-card-1"><img class="tinct-pact-source" src="assets/tinct-guide/pactos.webp" alt="Pacto Drenaje de vida y bonificaciones recomendadas" loading="eager" decoding="async"></div><div class="tinct-pact-card tinct-pact-card-2"><img class="tinct-pact-source" src="assets/tinct-guide/pactos.webp" alt="Pacto Deus Ex Machina y bonificaciones recomendadas" loading="eager" decoding="async"></div><div class="tinct-pact-card tinct-pact-card-3"><img class="tinct-pact-source" src="assets/tinct-guide/pactos.webp" alt="Pacto Los suspiros del cementerio y bonificaciones recomendadas" loading="eager" decoding="async"></div><div class="tinct-pact-card tinct-pact-card-4"><img class="tinct-pact-source" src="assets/tinct-guide/pactos.webp" alt="Pacto Revolución y bonificaciones recomendadas" loading="eager" decoding="async"></div><div class="tinct-pact-card tinct-pact-card-5"><img class="tinct-pact-source" src="assets/tinct-guide/pactos.webp" alt="Pacto Gemelos retorcidos: blancos y bonificaciones recomendadas" loading="eager" decoding="async"></div><div class="tinct-pact-card tinct-pact-card-6"><img class="tinct-pact-source" src="assets/tinct-guide/pactos.webp" alt="Pacto Gemelos retorcidos: negro y bonificaciones recomendadas" loading="eager" decoding="async"></div></div>
 <p><strong>¿C&#243;mo armo las piezas de los pactos de este personaje?</strong></p>
 <p><strong>Rol:</strong> Soporte · <strong>Prioriza:</strong> Aliemus, Sigilo y Resistencia a la muerte.<br><strong>Substat:</strong> Resistencia a la muerte.</p>
 <p><strong>Ruedas</strong></p>
@@ -1344,8 +1347,9 @@ for(const item of characterEntries){
   else if(/^adicional\b/.test(text)){guideMode='adicional';additionalStarted=true;}
   else if(/^(?:estadisticas (?:de )?(?:los )?pactos|pactos iniciales|¿como armo las piezas de los pactos)/.test(text))guideMode='armado';
   else if(/^(?:¿su posse|posse\b)/.test(text))guideMode='posse';
-  else if(/^equipos?\b/.test(text))guideMode='adicional';
-  else if(/^(?:soy nuevo|¿para que funciona nuestro despertar|aptitud reforja|¿cual es su pasiva|¿tiene algun combo)/.test(text))guideMode=additionalStarted?'adicional':'original';
+  else if(/^equipos?\b/.test(text)){guideMode='adicional';additionalStarted=true;}
+  else if(/^(?:soy nuevo|¿para que funciona nuestro despertar|aptitud reforja|¿cual es su pasiva)/.test(text))guideMode=additionalStarted?'adicional':'original';
+  else if(/^¿tiene algun combo/.test(text)){if(guideMode!=='posse')guideMode=additionalStarted?'adicional':'original';}
   if(guideMode==='original')remainingNodes.push(el);else if(!(guideMode==='ruedas'&&/^ruedas\s*:?[\s]*$/.test(text)))guideSections[guideMode].push(el);
  }
  for(const [kind,nodes] of Object.entries(guideSections)){
