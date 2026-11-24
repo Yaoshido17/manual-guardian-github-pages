@@ -179,6 +179,25 @@
 @media(max-width:720px){.community-ranking-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.community-ranking-heading{display:block}.community-vote-status{max-width:none;margin-top:14px}.community-character-art{height:210px}}
 @media(max-width:420px){.community-ranking-grid{grid-template-columns:1fr}.community-character-art{height:260px}.community-character-copy{padding:14px}.community-character-card.is-podium-1{grid-template-columns:1fr}.community-character-card.is-podium-1 .community-character-art{height:245px}.community-character-card.is-podium-1 .community-character-copy{padding:14px}}
 </style>
+<style id="tinct-guide-media">
+.tinct-wheel-catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:14px 0 18px}
+.character-entry .tinct-wheel-catalog p{display:flex;align-items:center;min-height:44px;margin:0;padding:9px 11px;border:1px solid var(--line);border-radius:7px;background:var(--surface2);color:var(--ink);font-size:12px;line-height:1.45}
+.tinct-pact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 20px}
+.tinct-pact-card{min-width:0;overflow:hidden;border:1px solid #49454a;border-radius:8px;background-color:#171923;background-image:url("assets/tinct-guide/pactos.webp");background-repeat:no-repeat}
+.tinct-pact-card-1{aspect-ratio:1.36;background-size:205% 318%;background-position:1% 1%}
+.tinct-pact-card-2{aspect-ratio:1.36;background-size:205% 318%;background-position:100% 1%}
+.tinct-pact-card-3{aspect-ratio:1.48;background-size:205% 346%;background-position:1% 49%}
+.tinct-pact-card-4{aspect-ratio:1.48;background-size:205% 346%;background-position:100% 49%}
+.tinct-pact-card-5{aspect-ratio:1.44;background-size:205% 337%;background-position:1% 95%}
+.tinct-pact-card-6{aspect-ratio:1.44;background-size:205% 337%;background-position:100% 95%}
+.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple{display:grid;grid-template-columns:minmax(0,1fr);width:min(100%,1000px);gap:14px;align-items:start;margin:14px 0 18px}
+.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple img.manual-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0;padding:4px;border:1px solid var(--line);border-radius:7px;background:var(--surface)}
+.tinct-wheel-art{width:min(100%,720px);margin:14px 0 18px;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#17181e}
+.tinct-wheel-art img{display:block;width:100%;max-width:100%;height:auto;max-height:none;margin:0;object-fit:contain}
+.tinct-team-gallery.character-image-row--multiple{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));width:100%;gap:12px;align-items:start;margin:14px 0 18px}
+.tinct-team-gallery img.manual-image{display:block;width:100%;height:auto;max-width:100%;max-height:none;margin:0;padding:4px;border:1px solid var(--line);border-radius:7px;background:var(--surface)}
+@media(max-width:680px){.tinct-pact-grid{grid-template-columns:1fr}.character-entry[data-index="106"] .character-tab-panel[id$="-armado"] .character-image-row--multiple{width:100%}.tinct-team-gallery.character-image-row--multiple{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">&#10022;</span>Manual del Guardián</a><div class="top-actions"><button class="install-app" id="install-app" type="button">Instalar app</button><a class="top-link" href="#biblioteca">Ir a la biblioteca &#8595;</a></div></div></header>
@@ -1180,15 +1199,14 @@
 <tr><td><strong>Gemelo retorcido blanco</strong></td><td>Para activar las pasivas de ruedas como Shrouded Birth y Birth of a Soul.</td></tr>
 <tr><td><strong>Revoluci&#243;n</strong></td><td>Para usar su definitiva y su OE con mayor facilidad.</td></tr>
 </tbody></table></div>
-<img class="manual-image" src="assets/tinct-guide/pactos.webp" alt="Efectos de los pactos recomendados para Tinct">
+<div class="tinct-pact-grid" role="group" aria-label="Efectos de los pactos recomendados para Tinct"><div class="tinct-pact-card tinct-pact-card-1" role="img" aria-label="Pacto Drenaje de vida y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-2" role="img" aria-label="Pacto Deus Ex Machina y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-3" role="img" aria-label="Pacto Los suspiros del cementerio y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-4" role="img" aria-label="Pacto Revolución y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-5" role="img" aria-label="Pacto Gemelos retorcidos: blancos y bonificaciones recomendadas"></div><div class="tinct-pact-card tinct-pact-card-6" role="img" aria-label="Pacto Gemelos retorcidos: negro y bonificaciones recomendadas"></div></div>
 <p><strong>¿C&#243;mo armo las piezas de los pactos de este personaje?</strong></p>
 <p><strong>Rol:</strong> Soporte · <strong>Prioriza:</strong> Aliemus, Sigilo y Resistencia a la muerte.<br><strong>Substat:</strong> Resistencia a la muerte.</p>
 <p><strong>Ruedas</strong></p>
 <p>Estas son las ruedas recomendadas en la gu&#237;a de Tinct:</p>
-<ul><li>Manikin of Oblivion</li><li>To the Stars</li><li>Grace Through Pain</li><li>Private Afternoon</li><li>Deathless Ascent</li><li>Hour of Fortune</li><li>Amidst the Downpour</li><li>Birth of a Soul</li><li>Dusk and Dawn</li><li>Flamebound Navigator</li><li>Shrouded Birth</li><li>The Last Verse</li><li>Merciful Nurturing</li><li>Eternal Requiem</li><li>Veiled Anguish</li><li>Moment of Reunion</li><li>Thirsting Brush</li><li>To My Dearest Friend</li><li>Elevated Focus</li></ul>
-<img class="manual-image" src="assets/tinct-guide/catalogo-ruedas.webp" alt="Cat&#225;logo visual de ruedas recomendadas para Tinct">
+<div class="tinct-wheel-catalog"><p>Manikin of Oblivion</p><p>To the Stars</p><p>Grace Through Pain</p><p>Private Afternoon</p><p>Deathless Ascent</p><p>Hour of Fortune</p><p>Amidst the Downpour</p><p>Birth of a Soul</p><p>Dusk and Dawn</p><p>Flamebound Navigator</p><p>Shrouded Birth</p><p>The Last Verse</p><p>Merciful Nurturing</p><p>Eternal Requiem</p><p>Veiled Anguish</p><p>Moment of Reunion</p><p>Thirsting Brush</p><p>To My Dearest Friend</p><p>Elevated Focus</p></div>
 <p><strong>Ruedas iniciales: seamos bendecidos por la gloriosa luz de las ruedas R de Arco Uno.</strong></p>
-<img class="manual-image" src="assets/tinct-guide/ruedas-arco-1.webp" alt="Cuatro ruedas iniciales recomendadas para Tinct en Arco Uno">
+<div class="tinct-wheel-art"><img class="manual-image" src="assets/tinct-guide/ruedas-arco-1.webp" alt="Cuatro ruedas iniciales recomendadas para Tinct en Arco Uno"></div>
 <p>Estas son las mejores ruedas solo en Arco 1. Tinct destaca en las peleas contra jefes que aplican muchos efectos negativos. Para esos casos, utiliza un armado defensivo o de Resistencia a la muerte: no la llevaremos para potenciar a alguien, sino por su valiosa carta que elimina efectos negativos. En esta funci&#243;n, nadie puede competir con ella.</p>
 <p><strong>Equipo</strong></p>
 <p>Tinct proporciona mucha Probabilidad cr&#237;tica y Da&#241;o cr&#237;tico durante un turno de burst. Tambi&#233;n elimina m&#250;ltiples efectos negativos y reduce el coste de las cartas. Estas fortalezas favorecen a los hyper carries y a personajes con cartas de coste elevado. Sus efectos aleatorios pueden ofrecer mejoras excelentes o efectos sencillos, pero el conjunto no llega a ser realmente destacable.</p>
